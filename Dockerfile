@@ -40,8 +40,8 @@ RUN set -ex \
           | sort -u) \
      # Install kcptun
      && cd /tmp/repo/ \
-     && wget -Y off https://github.com/xtaci/kcptun/releases/download/v20190515/kcptun-linux-arm64-20190515.tar.gz \
-     && tar xf kcptun-linux-arm64-20190515.tar.gz \
+     && wget -Y off https://github.com/xtaci/kcptun/releases/download/v20190515/kcptun-linux-amd64-20190515.tar.gz \
+     && tar xf kcptun-linux-amd64-20190515.tar.gz \
      && mv client_linux_amd64 /usr/sbin/kcptun \
      && rm -rf /tmp/repo \
      # install privoxy

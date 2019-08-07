@@ -47,6 +47,7 @@ RUN set -ex \
      # install privoxy
      && apk add --no-cache privoxy \
      && sed -in '/^listen-address/d' /etc/privoxy/config \
+     && echo "max-client-connections 2048" >> /etc/privoxy/config \
      && echo "listen-address  0.0.0.0:8118" >> /etc/privoxy/config \
      && echo "forward-socks5  /  127.0.0.1:1080 ." >> /etc/privoxy/config
 

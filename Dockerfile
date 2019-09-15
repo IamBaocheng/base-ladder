@@ -7,6 +7,8 @@ LABEL maintainer="nobody<nobody@nobody.com>"
 
 EXPOSE 8118 1080
 
+ENV ARCH=amd64
+
 COPY . /tmp/repo
 RUN set -ex \
      # Build environment setup
@@ -40,9 +42,9 @@ RUN set -ex \
           | sort -u) \
      # Install kcptun
      && cd /tmp/repo/ \
-     && wget -Y off https://github.com/xtaci/kcptun/releases/download/v20190515/kcptun-linux-amd64-20190515.tar.gz \
-     && tar xf kcptun-linux-amd64-20190515.tar.gz \
-     && mv client_linux_amd64 /usr/sbin/kcptun \
+     && wget -Y off https://github.com/xtaci/kcptun/releases/download/v20190515/kcptun-linux-${ARCH}-20190515.tar.gz \
+     && tar xf kcptun-linux-${ARCH}-20190515.tar.gz \
+     && mv client_linux_${ARCH} /usr/sbin/kcptun \
      && rm -rf /tmp/repo \
      # install privoxy
      && apk add --no-cache privoxy \

@@ -8,6 +8,9 @@ LABEL maintainer="nobody<nobody@nobody.com>"
 EXPOSE 8118 1080
 
 ENV ARCH=amd64
+ENV SSVER=v3.3.4
+ENV KCPVER=20200103
+
 
 COPY . /tmp/repo
 RUN set -ex \
@@ -28,7 +31,7 @@ RUN set -ex \
      # Build & install shadowsocks-libev
      && git clone https://github.com/shadowsocks/shadowsocks-libev.git /tmp/repo/shadowsocks-libev \
      && cd /tmp/repo/shadowsocks-libev \
-     && git checkout v3.2.5 \
+     && git checkout ${SSVER} \
      && git submodule update --init --recursive \
      && ./autogen.sh \
      && ./configure --prefix=/usr --disable-documentation \
@@ -42,8 +45,8 @@ RUN set -ex \
           | sort -u) \
      # Install kcptun
      && cd /tmp/repo/ \
-     && wget -Y off https://github.com/xtaci/kcptun/releases/download/v20190515/kcptun-linux-${ARCH}-20190515.tar.gz \
-     && tar xf kcptun-linux-${ARCH}-20190515.tar.gz \
+     && wget -Y off https://github.com/xtaci/kcptun/releases/download/v${KCPVER}/kcptun-linux-${ARCH}-${KCPVER}.tar.gz \
+     && tar xf kcptun-linux-${ARCH}-${KCPVER}.tar.gz \
      && mv client_linux_${ARCH} /usr/sbin/kcptun \
      && rm -rf /tmp/repo \
      # install privoxy

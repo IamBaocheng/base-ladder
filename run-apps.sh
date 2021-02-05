@@ -1,6 +1,3 @@
-# run privoxy
-# privoxy /etc/privoxy/config
-
 # check ss-config.json
 if [ -e ss-config.json ]
 then
@@ -12,11 +9,10 @@ then
     else
         echo "Shadowsocks Directly w/o kcptun"
     fi
-    ss-local -c ss-config.json &
-    # polipo -c /app/polipo-config
+    sslocal -c ss-config.json &
     privoxy --no-daemon /etc/privoxy/config
 else
-    ss-local --help
+    sslocal --help
     kcptun --help
     echo "At least a ss-config.json is needed"
 fi
